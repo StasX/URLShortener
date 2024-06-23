@@ -6,6 +6,7 @@ from utils.app_config import AppConfig
 
 
 app = Flask(__name__)
+app.secret_key = AppConfig.secret_key
 connect(db=AppConfig.db_name, host=AppConfig.db_host, port=AppConfig.db_port)
 # connect(db=AppConfig.db_name, username=AppConfig.db_user,
 #         password=AppConfig.db_password, host=AppConfig.db_host, port=AppConfig.db_port)

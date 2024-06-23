@@ -5,7 +5,7 @@ load_dotenv()
 
 
 class AppConfig:
-    session_secret_key = environ.get("SESSION_SECRET_KEY")
+    secret_key = environ.get("SECRET_KEY")
     passwords_salt = environ.get("PASSWORDS_SALT")
     db_name = environ.get("DB_NAME")
     db_host = environ.get("DB_HOST")
