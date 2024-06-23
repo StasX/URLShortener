@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %} Home {% endblock title %}
+{% block content %}
+<div class="card" style="width: 18rem; height:260px">
+    <form class="card-body" name="reverse">
+        <h5 class="card-title">Get real URL from shortened URL</h5>
+        <p class="card-text">Just enter url...</p>
+        <div>
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="inputPassword2" class="sr-only">Shortened URL</label>
+                <input type="text" class="form-control" id="url" placeholder="Shortened URL">
+              </div>
+              <button type="submit" class="btn btn-primary mb-2">Get real URL</button>
+        </div>
+    </form>
+</div>
+<div class="card" style="width: 18rem; height:260px">
+    <div class="card-body" name="reverse">
+        <h5 class="card-title">Want to generate short URLs?</h5>
+        <p class="card-text">Please sign in and get more futures...</p>
+        <a href="{{url_for('auth_view.login')}}" class="btn btn-primary">Sign in</a>
+        <a href="{{url_for('auth_view.register')}}" class="btn btn-primary">Sign up</a>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,78 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    text-align: center;
+}
+
+
+body {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    ;
+    grid-template-rows: 64px auto 30px;
+}
+
+header,
+main,
+footer {
+    display: grid;
+    grid-column: span 10;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+    border-color: rgba(120, 120, 120, 0.8);
+    box-shadow: 0 1px 1px rgba(120, 120, 120, 0.075) inset, 0 0 8px rgba(136, 136, 136, 0.6);
+    outline: 0 none;
+}
+.register-form,
+.login-form {
+    text-align: left;
+    margin: 140px auto;
+}
+
+.register-form>div,
+.login-form>div {
+    margin-top: 10px;
+}
+
+.register-form .btn-dark,
+.login-form .btn-dark,
+.login-form .btn-outline-dark {
+    display: block;
+    width: 120px;
+    text-align: center;
+}
+
+.register-form .btn-dark{
+    margin: auto;
+}
+
+.login-form .btn-dark {
+    float: right;
+}
+
+.login-form .btn-outline-dark {
+    float: left;
+}
+
+.register-form label,
+.login-form label {
+    padding-left: 8px;
+}
