@@ -55,7 +55,8 @@ def register():
         return render_template("register.html", error=str(err))
 
 
-@auth_blueprint.route("/logout", methods=["GET"])
+@auth_blueprint.route("/logout")
 def logout():
     session.clear()
     # return to home page
+    return redirect(url_for("home_view.home"))
