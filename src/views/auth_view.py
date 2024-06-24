@@ -15,13 +15,21 @@ def login():
     try:
         email = request.form["username"]
         password = request.form["password"]
-        user = UserModel.objects.get(
-            {"email": email, "password": Security.hash(password)})
-        if user:
-            session["current_user"] = user
-            redirect(url_for("home_view.home"))
+        users = UserModel.objects(
+            email=email, password=Security.hash(password))
+        if len(users) > 0:
+            user = users[0]
+            session["current_user"] = {
+                "id": str(user.id),
+                "first_name": user.first_name,
+                "last_name": user.last_name,
+                "email": user.email,
+            }
+            return redirect(url_for("home_view.home"))
+        return render_template("login.html", error="Wrong credentials")
     except Exception as err:
         print(err)
+        return render_template("login.html", error=str(err))
 
 
 @auth_blueprint.route("/register", methods=["GET", "POST"])

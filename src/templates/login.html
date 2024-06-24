@@ -2,15 +2,14 @@
 {% block title %} Sign in {% endblock title %}
 {% block content %}
 <div class="container">
-    <form class="col-lg-6 col-md-8 col-sm-10 col-xs-12 login-form">
+    <form class="col-lg-6 col-md-8 col-sm-10 col-xs-12 login-form" method="post">
         <div class="form-group">
-            <label for="exampleInputEmail1">Username:</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                placeholder="Enter email">
+            <label for="username">Username:</label>
+            <input type="text" class="form-control" id="username" name="username">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Password:</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" name="password">
         </div>
         <div class="row">
             <div class="col-sm-6">
@@ -20,6 +19,12 @@
                 <a href="{{ url_for('auth_view.register') }}" class="btn btn-md btn-outline-dark">Sign up</a>
             </div>
         </div>
+        {% if error %}
+        <div>
+            <div class="alert alert-warning"">{{error}}</div>
+            
+        </div>
+        {% endif %}
     </form>
 </div>
 {% endblock content %}
