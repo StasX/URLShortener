@@ -21,6 +21,10 @@ footer {
     grid-column: span 10;
 }
 
+#result{
+    display: none;
+}
+
 textarea:focus,
 input[type="text"]:focus,
 input[type="password"]:focus,
