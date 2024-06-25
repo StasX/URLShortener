@@ -3,8 +3,7 @@ function reverse(url) {
     const result = $("#result");
     $.post("/geturl", { "url": url }).done((data) => {
         result.val(data.url);
-        result.css({ "display": "block" });       
-        console.log(data)
+        result.css({ "display": "block" });
     }).fail((err) => {
         result.val("Something went wrong.");
         result.css({ "display": "block" });
