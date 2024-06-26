@@ -4,9 +4,17 @@ from views.auth_view import auth_blueprint
 from views.home_view import home_blueprint
 from utils.app_config import AppConfig
 
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
 app = Flask(__name__)
 app.secret_key = AppConfig.secret_key
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=["4 per minute"],
+    storage_uri="memory://",
+)
 connect(db=AppConfig.db_name, host=AppConfig.db_host, port=AppConfig.db_port)
 # connect(db=AppConfig.db_name, username=AppConfig.db_user,
 #         password=AppConfig.db_password, host=AppConfig.db_host, port=AppConfig.db_port)
