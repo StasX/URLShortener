@@ -21,10 +21,12 @@ footer {
     grid-column: span 10;
 }
 
-#result{
+#shortedUrl,
+#result {
     display: none;
 }
 
+#fullUrl:focus,
 textarea:focus,
 input[type="text"]:focus,
 input[type="password"]:focus,
@@ -45,6 +47,7 @@ input[type="color"]:focus,
     box-shadow: 0 1px 1px rgba(120, 120, 120, 0.075) inset, 0 0 8px rgba(136, 136, 136, 0.6);
     outline: 0 none;
 }
+
 .register-form,
 .login-form {
     text-align: left;
@@ -64,7 +67,7 @@ input[type="color"]:focus,
     text-align: center;
 }
 
-.register-form .btn-dark{
+.register-form .btn-dark {
     margin: auto;
 }
 
@@ -81,13 +84,18 @@ input[type="color"]:focus,
     padding-left: 8px;
 }
 
-.home .card{
-    width:500px;
+.home .card {
+    width: 500px;
     height: 360px;
     display: block;
     margin: 10px auto;
 }
-.home output{
+
+#fullUrl {
+    height: 160px;
+}
+
+.home output {
     max-height: 160px;
     overflow-y: auto;
 }
