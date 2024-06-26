@@ -80,3 +80,14 @@ input[type="color"]:focus,
 .login-form label {
     padding-left: 8px;
 }
+
+.home .card{
+    width:500px;
+    height: 360px;
+    display: block;
+    margin: 10px auto;
+}
+.home output{
+    max-height: 160px;
+    overflow-y: auto;
+}
