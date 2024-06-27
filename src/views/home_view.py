@@ -2,6 +2,8 @@ from flask import Blueprint, request, render_template, session, redirect, jsonif
 import requests
 from random import choice
 from string import ascii_letters, digits
+from models.url_model import UrlModel
+from models.user_model import UserModel
 home_blueprint = Blueprint("home_view", __name__)
 
 
@@ -22,8 +24,17 @@ def get_url():
 
 @home_blueprint.route("/short", methods=["POST"])
 def short_it():
-    url = request.form.get("url")
+    user_id = session["current_user"]["id"]
+    user_model = UserModel.objects.get(id=user_id)
+    full_url = request.form.get("url")
     chars = ascii_letters+digits
-    short_string = ''.join(choice(chars) for _ in range(9))
-    short_url = f"{request.host}/{short_string}"
+    short_url = None
+    run_again = True
+    while run_again:
+        short_string = ''.join(choice(chars) for _ in range(6))
+        short_url = f"http://{request.host}/{short_string}"
+        if (len(UrlModel.objects(short_url=short_url)) == 0):
+            url_model = UrlModel(short_url=short_url,
+                                 full_url=full_url, user=user_model).save()
+            run_again = False
     return jsonify({"url": short_url})
