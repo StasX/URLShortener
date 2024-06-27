@@ -25,7 +25,7 @@ def login():
                 "last_name": user.last_name,
                 "email": user.email,
             }
-            return redirect(url_for("home_view.home"))
+            return redirect(url_for("pages_view.home"))
         return render_template("login.html", error="Wrong credentials")
     except Exception as err:
         print(err)
@@ -57,7 +57,7 @@ def register():
                 "last_name": user.last_name,
                 "email": user.email,
             }
-            return redirect(url_for("home_view.home"))
+            return redirect(url_for("pages_view.home"))
         return render_template("register.html", error="Something went wrong, and user haven't created.")
     except Exception as err:
         return render_template("register.html", error=str(err))
@@ -67,4 +67,4 @@ def register():
 def logout():
     session.clear()
     # return to home page
-    return redirect(url_for("home_view.home"))
+    return redirect(url_for("pages_view.home"))

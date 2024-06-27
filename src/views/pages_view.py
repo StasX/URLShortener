@@ -4,16 +4,16 @@ from random import choice
 from string import ascii_letters, digits
 from models.url_model import UrlModel
 from models.user_model import UserModel
-home_blueprint = Blueprint("home_view", __name__)
+pages_blueprint = Blueprint("pages_view", __name__)
 
 
-@home_blueprint.route("/")
-@home_blueprint.route("/home")
+@pages_blueprint.route("/")
+@pages_blueprint.route("/home")
 def home():
     return render_template("home.html")
 
 
-@home_blueprint.route("/geturl", methods=["POST"])
+@pages_blueprint.route("/geturl", methods=["POST"])
 def get_url():
     url = request.form.get("url")
     response = requests.get(url, allow_redirects=False)
@@ -22,7 +22,7 @@ def get_url():
     return jsonify({"url": url})
 
 
-@home_blueprint.route("/short", methods=["POST"])
+@pages_blueprint.route("/short", methods=["POST"])
 def short_it():
     user_id = session["current_user"]["id"]
     user_model = UserModel.objects.get(id=user_id)

@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from mongoengine import connect
 from views.auth_view import auth_blueprint
-from views.home_view import home_blueprint
+from views.pages_view import pages_blueprint
 from utils.app_config import AppConfig
 
 from flask_limiter import Limiter
@@ -20,7 +20,7 @@ connect(db=AppConfig.db_name, host=AppConfig.db_host, port=AppConfig.db_port)
 #         password=AppConfig.db_password, host=AppConfig.db_host, port=AppConfig.db_port)
 
 app.register_blueprint(auth_blueprint)
-app.register_blueprint(home_blueprint)
+app.register_blueprint(pages_blueprint)
 
 
 @app.errorhandler(404)
