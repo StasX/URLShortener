@@ -1,5 +1,7 @@
 from flask import Blueprint, request, render_template, session, redirect, jsonify
 import requests
+from random import choice
+from string import ascii_letters, digits
 home_blueprint = Blueprint("home_view", __name__)
 
 
@@ -16,3 +18,12 @@ def get_url():
     if response.is_redirect or response.status_code == 302:
         url = response.headers['Location']
     return jsonify({"url": url})
+
+
+@home_blueprint.route("/short", methods=["POST"])
+def short_it():
+    url = request.form.get("url")
+    chars = ascii_letters+digits
+    short_string = ''.join(choice(chars) for _ in range(9))
+    short_url = f"{request.host}/{short_string}"
+    return jsonify({"url": short_url})
