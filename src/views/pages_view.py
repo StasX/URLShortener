@@ -1,9 +1,12 @@
-from flask import Blueprint, request, render_template, session, redirect, jsonify
+from flask import Blueprint, request, render_template, session, redirect, jsonify, Response
 import requests
 from random import choice
 from string import ascii_letters, digits
 from models.url_model import UrlModel
 from models.user_model import UserModel
+from mongoengine import DoesNotExist
+
+
 pages_blueprint = Blueprint("pages_view", __name__)
 
 
@@ -38,3 +41,15 @@ def short_it():
                                  full_url=full_url, user=user_model).save()
             run_again = False
     return jsonify({"url": short_url})
+
+
+@pages_blueprint.route("/<url_part>")
+def redirect_to(url_part):
+    try:
+        if url_part != "favicon.ico":
+            short_url = f"http://{request.host}/{url_part}"
+            url_model = UrlModel.objects.get(short_url=short_url)
+            return redirect(url_model.full_url)
+        return Response(status=200)
+    except DoesNotExist:
+        return render_template("404.html")
