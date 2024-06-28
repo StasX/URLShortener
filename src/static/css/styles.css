@@ -103,3 +103,15 @@ input[type="color"]:focus,
     max-height: 160px;
     overflow-y: auto;
 }
+
+#auth a,
+#auth span{
+    color: #777;
+    text-decoration: none;
+    cursor: pointer;
+}
+#auth a:hover,
+#auth span:hover{
+    color: #777;
+    text-decoration: underline;
+}

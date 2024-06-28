@@ -39,6 +39,18 @@ function shortIt() {
     isUrl(url) ? getShortUrl(url) : showShortedUrl("Invalid url.");
 }
 
+// Add handler for logout
+function logout() {
+    const url = `${location.origin}/logout`;
+    $.ajax({ url: url, method: "DELETE" })
+        .done(() => {
+            $("#dashboardLink").remove();
+            if (location.href != `${location.origin}/home`) location.href = `${location.origin}/home`;
+            $("#helloUser").text("Hello Guest");
+            $("#auth").html(`<a href="${location.origin}/login">Sign in</a>`)
+        });
+}
+
 // Load document
 $(document).ready(() => {
     // Add handlers to buttons and inputs

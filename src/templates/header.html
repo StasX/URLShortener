@@ -6,7 +6,7 @@
                 <a class="nav-item nav-link active" href="{{ url_for('home_view.render') }}">Home <span
                         class="sr-only">(current)</span></a>
                 {% if user %}
-                <a class="nav-item nav-link" href="{{ url_for('dashboard_view.render') }}">Dashboard</a>
+                <a class="nav-item nav-link" href="{{ url_for('dashboard_view.render') }}" id="dashboardLink">Dashboard</a>
                 {% endif %}
 
             </div>
@@ -15,19 +15,11 @@
             <div class="container">
                 {% if user %}
                 <div class="row">
-                    <div class="col-sm-12">Hello {{user.first_name}} {{user.last_name}}</div>
+                    <div class="col-sm-12" id="helloUser">Hello {{user.first_name}} {{user.last_name}}</div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-12" id="auth">
                         <span onclick="logout()">Sign out</span>
-                    </div>
-                </div>
-                {% else %}
-                <div class="row">
-                    <div class="col-sm-12">Hello Guest</div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12"><a href="{{ url_for('auth_view.login') }}">Sign in</a>
                     </div>
                 </div>
                 {% endif %}

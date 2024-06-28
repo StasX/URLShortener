@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, session, redirect, url_for
+from flask import Blueprint, request, render_template, session, redirect, url_for,Response
 from models.user_model import UserModel
 from utils.security import Security
 
@@ -63,8 +63,8 @@ def register():
         return render_template("register.html", error=str(err))
 
 
-@auth_blueprint.route("/logout")
+@auth_blueprint.route("/logout",methods=["DELETE"])
 def logout():
     session.clear()
-    # return to home page
-    return redirect(url_for("home_view.render"))
+    # return to client success
+    return Response(status=200)
