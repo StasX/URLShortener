@@ -1,13 +1,9 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <a class="navbar-brand" href="{{ url_for('home_view.render') }}">Shorty</a>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="{{ url_for('home_view.render' ) }}">Home <span
+                <a class="nav-item nav-link active" href="{{ url_for('home_view.render') }}">Home <span
                         class="sr-only">(current)</span></a>
                 {% if user %}
                 <a class="nav-item nav-link" href="{{ url_for('dashboard_view.render') }}">Dashboard</a>
@@ -15,23 +11,23 @@
 
             </div>
         </div>
-        <div class="col-lg-1 col-md-2">
+        <div class="col-md-2 col-sm-3 col-xs-4">
             <div class="container">
                 {% if user %}
                 <div class="row">
-                    <div class="col-md-12">Hello {{user.first_name}} {{user.last_name}}</div>
+                    <div class="col-sm-12">Hello {{user.first_name}} {{user.last_name}}</div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
-                        <a href="{{ url_for('auth_view.logout') }}">Sign out</a>
+                    <div class="col-sm-12">
+                        <span onclick="logout()">Sign out</span>
                     </div>
                 </div>
                 {% else %}
                 <div class="row">
-                    <div class="col-md-12">Hello Guest</div>
+                    <div class="col-sm-12">Hello Guest</div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12"><a href="{{ url_for('auth_view.login') }}">Sign in</a>
+                    <div class="col-sm-12"><a href="{{ url_for('auth_view.login') }}">Sign in</a>
                     </div>
                 </div>
                 {% endif %}
