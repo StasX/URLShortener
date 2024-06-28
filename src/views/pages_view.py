@@ -49,6 +49,8 @@ def redirect_to(url_part):
         if url_part != "favicon.ico":
             short_url = f"http://{request.host}/{url_part}"
             url_model = UrlModel.objects.get(short_url=short_url)
+            UrlModel.objects(short_url=short_url).update_one(
+                enters=url_model.enters+1)
             return redirect(url_model.full_url)
         return Response(status=200)
     except DoesNotExist:
