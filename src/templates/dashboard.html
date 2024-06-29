@@ -18,49 +18,7 @@
                 {% endfor %}
             </div>
             <div class="col-md-6">
-                <canvas id="pieChart"></canvas>
-                <script>
-                    var ctx = $("#pieChart")[0].getContext('2d');
-                    var myPieChart = new Chart(ctx, {
-                        type: 'pie',
-                        data: {
-                            labels: [
-                                {% for data in urls_data %}
-                        "{{data.short_url}}",
-                    {% endfor %}
-                    ],
-                    datasets: [{
-                        label: '# of Visits',
-                        data: [{% for data in urls_data %}
-                        "{{data.enters}}",
-                    {% endfor %}],
-                        backgroundColor: [
-                            {% for color in colors %}
-                    'rgba({{color[0]}}, {{color[1]}}, {{color[2]}}, 0.2)',
-                        {% endfor %}
-                        ],
-                    borderColor: [
-                        {% for color in colors %}
-                    'rgba({{color[0]}}, {{color[1]}}, {{color[2]}}, 1)',
-                        {% endfor %}
-                        ],
-                    borderWidth: 1
-                    }]
-                },
-                    options: {
-                        responsive: true,
-                            plugins: {
-                            legend: {
-                                position: 'top',
-                        },
-                            title: {
-                                display: true,
-                                    text: 'Pie Chart Example'
-                            }
-                        }
-                    }
-            });
-                </script>
+                <canvas id="urlsPie"></canvas>
             </div>
         </div>
     </div>

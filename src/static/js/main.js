@@ -62,4 +62,102 @@ $(document).ready(() => {
     $("#fullUrl").on('keypress', function (e) {
         if (e.which == 13) shortIt();
     });
+    // Display statistics
+    const pie = $("#urlsPie");
+    if (Array.from(pie).length) {
+        const ctx = pie[0].getContext('2d');
+        $.get(`${location.origin}/urls-stat`).done(data => {
+            const labels = [];
+            const visits = [];
+            $.each(data, function (index, item) {
+                labels.push(item.shortUrl)
+                visits.push(item.visits)
+            });
+            console.log(data)
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: visits,
+                        backgroundColor: [
+                            "rgba(255, 99, 71, 0.2)",
+                            "rgba(135, 206, 235, 0.2)",
+                            "rgba(75, 0, 130, 0.2)",
+                            "rgba(255, 215, 0, 0.2)",
+                            "rgba(34, 139, 34, 0.2)",
+                            "rgba(255, 105, 180, 0.2)",
+                            "rgba(240, 230, 140, 0.2)",
+                            "rgba(70, 130, 180, 0.2)",
+                            "rgba(210, 105, 30, 0.2)",
+                            "rgba(128, 0, 128, 0.2)",
+                            "rgba(255, 182, 193, 0.2)",
+                            "rgba(30, 144, 255, 0.2)",
+                            "rgba(144, 238, 144, 0.2)",
+                            "rgba(255, 160, 122, 0.2)",
+                            "rgba(186, 85, 211, 0.2)",
+                            "rgba(72, 61, 139, 0.2)",
+                            "rgba(255, 69, 0, 0.2)",
+                            "rgba(173, 216, 230, 0.2)",
+                            "rgba(123, 104, 238, 0.2)",
+                            "rgba(0, 255, 127, 0.2)",
+                            'rgba(255, 255, 0, 0.2)',
+                            'rgba(0, 255, 255, 0.2)',
+                            'rgba(255, 20, 147, 0.2)',
+                            'rgba(0, 100, 0, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 69, 0, 0.2)',
+                            'rgba(199, 21, 133, 0.2)',
+                            'rgba(255, 140, 0, 0.2)',
+                            'rgba(0, 191, 255, 0.2)',
+                            'rgba(147, 112, 219, 0.2)',
+                        ],
+                        borderColor: [
+                            "rgb(255, 99, 71)",
+                            "rgb(135, 206, 23)",
+                            "rgb(75, 0, 130)",
+                            "rgb(255, 215, 0)",
+                            "rgb(34, 139, 34)",
+                            "rgb(255, 105, 180)",
+                            "rgb(240, 230, 140)",
+                            "rgb(70, 130, 180)",
+                            "rgb(210, 105, 30)",
+                            "rgb(128, 0, 128)",
+                            "rgb(255, 182, 193)",
+                            "rgb(30, 144, 255)",
+                            "rgb(144, 238, 144)",
+                            "rgb(255, 160, 122)",
+                            "rgb(186, 85, 211)",
+                            "rgb(72, 61, 139)",
+                            "rgb(255, 69, 0)",
+                            "rgb(173, 216, 230)",
+                            "rgb(123, 104, 238)",
+                            "rgb(0, 255, 127)",
+                            'rgb(255, 255, 0)',
+                            'rgb(0, 255, 255)',
+                            'rgb(255, 20, 147)',
+                            'rgb(0, 100, 0)',
+                            'rgb(255, 99, 132)',
+                            'rgb(255, 69, 0)',
+                            'rgb(199, 21, 133)',
+                            'rgb(255, 140, 0)',
+                            'rgb(0, 191, 255)',
+                            'rgb(147, 112, 219)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                }
+            });
+        }).fail(err => {
+
+        });
+    }
 });

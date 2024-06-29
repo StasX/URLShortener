@@ -12,8 +12,21 @@ dashboard_blueprint = Blueprint("dashboard_view", __name__)
 @dashboard_blueprint.route("/dashboard")
 def render():
     user = session["current_user"]
-    urls_models=UrlModel.objects(user=user["id"])
-    colors=[]
+    urls_models = UrlModel.objects(user=user["id"])
+    colors = []
     for i in range(len(urls_models)):
-        colors.append([randint(0,255),randint(0,255),randint(0,255)])
-    return render_template("dashboard.html",urls_data=urls_models,colors=colors)
+        colors.append([randint(0, 255), randint(0, 255), randint(0, 255)])
+    return render_template("dashboard.html", urls_data=urls_models, colors=colors)
+
+
+@dashboard_blueprint.route("/urls-stat")
+def stat():
+    user = session["current_user"]
+    urls_models = UrlModel.objects(user=user["id"])
+    data = [{
+        "id": str(url_model.id),
+        "shortUrl": url_model.short_url,
+        "fullUrl": url_model.full_url,
+        "visits": url_model.enters
+    } for url_model in urls_models]
+    return jsonify(data)
