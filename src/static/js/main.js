@@ -57,9 +57,9 @@ function generateCard(data) {
     return `
         <div class="card col-md-8 offset-md-2">
             <div class="card-body">
-                <div>Full url: ${data.fullUrl}</div>
-                <div>Shorted url: ${data.shortUrl}</div>
-                <div>Visits: ${data.visits}</div>
+                <div class="mt-2"><b>Shorted url:</b> ${data.shortUrl}</div>
+                <div class="mt-2"><b>Full url:</b> ${data.fullUrl}</div> 
+                <div class="mt-2 mb-4"><b>Visits:</b> ${data.visits}</div>
                 <div>
                     <button onclick="removeUrl('${data.id}')" class="btn btn-md btn-danger">
                         Remove link <i class="fa-solid fa-xmark"></i>
