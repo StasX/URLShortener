@@ -51,6 +51,26 @@ function logout() {
         });
 }
 
+
+//Generate url card
+function generateCard(data) {
+    return `
+        <div class="card col-md-8 offset-md-2">
+            <div class="card-body">
+                <div>Full url: ${data.fullUrl}</div>
+                <div>Shorted url: ${data.shortUrl}</div>
+                <div>Visits: ${data.visits}</div>
+                <div>
+                    <button onclick="removeUrl('${data.id}')" class="btn btn-md btn-danger">
+                        Remove link <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+
 // Load document
 $(document).ready(() => {
     // Add handlers to buttons and inputs
@@ -64,16 +84,17 @@ $(document).ready(() => {
     });
     // Display statistics
     const pie = $("#urlsPie");
+    const urlsContainer = $("#urlsContainer");
     if (Array.from(pie).length) {
         const ctx = pie[0].getContext('2d');
         $.get(`${location.origin}/urls-stat`).done(data => {
             const labels = [];
             const visits = [];
             $.each(data, function (index, item) {
+                urlsContainer.append(generateCard(item));
                 labels.push(item.shortUrl)
                 visits.push(item.visits)
             });
-            console.log(data)
             new Chart(ctx, {
                 type: 'pie',
                 data: {
