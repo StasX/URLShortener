@@ -1,7 +1,68 @@
 {% extends "layout.html" %}
 {% block title %} Page not found {% endblock title %}
 {% block content %}
-<div class="dashboard-page">
-    
+<div class="dashboard">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                {% for data in urls_data %}
+                <div class="card col-md-8 offset-md-2">
+                    <div class="card-body">
+                        <div>Full url: {{data.full_url}}</div>
+                        <div>Shorted url: {{data.short_url}}</div>
+                        <div>Visits: {{data.enters}}</div>
+                        <div><button onclick="removeUrl(`{{ data.id }}`)" class="btn btn-md btn-danger">Remove link <i
+                                    class="fa-solid fa-xmark"></i></button></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col-md-6">
+                <canvas id="pieChart"></canvas>
+                <script>
+                    var ctx = $("#pieChart")[0].getContext('2d');
+                    var myPieChart = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: [
+                                {% for data in urls_data %}
+                        "{{data.short_url}}",
+                    {% endfor %}
+                    ],
+                    datasets: [{
+                        label: '# of Visits',
+                        data: [{% for data in urls_data %}
+                        "{{data.enters}}",
+                    {% endfor %}],
+                        backgroundColor: [
+                            {% for color in colors %}
+                    'rgba({{color[0]}}, {{color[1]}}, {{color[2]}}, 0.2)',
+                        {% endfor %}
+                        ],
+                    borderColor: [
+                        {% for color in colors %}
+                    'rgba({{color[0]}}, {{color[1]}}, {{color[2]}}, 1)',
+                        {% endfor %}
+                        ],
+                    borderWidth: 1
+                    }]
+                },
+                    options: {
+                        responsive: true,
+                            plugins: {
+                            legend: {
+                                position: 'top',
+                        },
+                            title: {
+                                display: true,
+                                    text: 'Pie Chart Example'
+                            }
+                        }
+                    }
+            });
+                </script>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock content %}

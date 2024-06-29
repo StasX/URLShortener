@@ -115,3 +115,16 @@ input[type="color"]:focus,
     color: #777;
     text-decoration: underline;
 }
+
+.dashboard .card {
+    width: 500px;
+    display: block;
+    margin: 10px auto;
+    text-align: left;
+}
+
+.dashboard .btn-danger {
+margin: auto;
+display: block;
+width:140px;
+}
